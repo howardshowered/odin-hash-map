@@ -4,11 +4,31 @@ class Node {
     value = null;
 
     constructor(key, value) {
-        this.key =key;
+        this.key = key;
         this.value = value;
     }
     
 }
+
+class LinkedList {
+    head = null;
+    tail = null;
+
+    append(key, value) {
+        const newNode = new Node(key, value);
+
+        if(this.head === null) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
+
+    }
+    
+}
+
 export default class HashMap {
     #loadFactor = 0.75;
     #capacity = 16;
