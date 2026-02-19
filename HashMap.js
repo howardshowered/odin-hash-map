@@ -24,6 +24,39 @@ class LinkedList {
             this.tail.next = newNode;
             this.tail = newNode;
         }
+    }
+
+    //removes node
+    remove(key) {
+        let curr = this.head;
+        let prev = null;
+        while( curr !== null)
+        {
+            if( curr.key === key)
+            {
+                if(prev === null) {
+                    this.head = curr.next;
+                    return;
+                } else {
+                    prev.next = curr.next;
+                    return;
+                }
+            }
+            prev = curr;
+            curr = curr.next;
+        } 
+        return null;
+    }
+
+    //return node
+    get(key) {
+        let curr = this.head;
+        while( curr !== null) {
+            if( curr.key === key)
+                return curr;
+            curr = curr.next;
+        }
+        return null;
 
     }
     
@@ -63,18 +96,44 @@ export default class HashMap {
         }
 
         const bucketIndex = this.#getIndex(key);
+
         if ( this.buckets[bucketIndex]) {
+            const list = this.buckets[bucketIndex];
+            if(list.get(key)) {
+                const node = list.get(key);
+                node.value = value;
+            } else {
+                list.append(key, value);
+                this.#length++;
+            }
+
             
+        } else {
+            const list = new LinkedList();
+            list.append(key, value);
+            this.#length++;
         }
-
-        
-
 
 
     }
 
     #getIndex (key) {
         return this.hash(key, this.#capacity);
+    }
+
+    entries() {
+        const tempArr = [];
+        for( let list of this.#buckets) {
+            if(list) {
+                let currr = list.head;
+
+                while (curr) {
+                    tempArr.push([curr.key, curr.value]);
+                    curr = cur.next;
+                }
+            }
+        }
+        return tempArr;
     }
 
 }
