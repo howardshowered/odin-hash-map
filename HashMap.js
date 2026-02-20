@@ -91,6 +91,7 @@ export default class HashMap {
     set(key, value) {
         //if key exists , then the old value is overwritten
         if( this.#length > this.#capacity * this.#loadFactor) {
+            //@TODO implement increasing capacity and copying of buckets.
             //if length is larger than capacity then double capcity and create
             // a new HashMap with those values by setting them 
         }
@@ -137,5 +138,3 @@ export default class HashMap {
     }
 
 }
-
-//@TODO add linked list and node classes
